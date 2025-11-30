@@ -9,6 +9,8 @@ public class Traversal {
     // 출력 경로 저장 StringBuilder
     private static StringBuilder sb;
 
+
+
     public static void searchGraph(List<int[][]> graphList) {
         System.out.println("1. 그래프 탐방 수행 결과");
         int graphIndex = 1;
