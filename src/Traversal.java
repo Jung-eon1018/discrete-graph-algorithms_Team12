@@ -1,4 +1,6 @@
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Traversal {
     public static void searchGraph(List<int[][]> graphList) {
@@ -27,6 +29,25 @@ public class Traversal {
     }
 
     private static void bfs(int[][] graph) {
+        int n = graph.length;
+        boolean[] visited = new boolean[n];
+        Queue<Integer> queue = new LinkedList<>();
+
+        int start = 0;
+        queue.offer(start);
+        visited[start] = true;
+
+        while(!queue.isEmpty()) {
+            int v = queue.poll();
+            System.out.println(v+" ");
+
+            for(int i = 0; i < n; i++) {
+                if(!visited[i] && graph[v][i] == 1) {
+                    queue.offer(i);
+                    visited[i] = true;
+                }
+            }
+        }
 
     }
 }
