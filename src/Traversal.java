@@ -23,9 +23,13 @@ public class Traversal {
             visited = new boolean[g.length];
             dfs(g, 1); //시작점은 항상 1번 정점
             System.out.println(sb.toString());
+            System.out.println();
 
             System.out.println("너비 우선 탐색");
-            bfs(g);
+            sb = new StringBuilder();
+            visited = new boolean[g.length];
+            bfs(g,1);
+            System.out.println(sb.toString());
             System.out.println();
 
             System.out.println("============================");
@@ -54,26 +58,28 @@ public class Traversal {
         }
     }
 
-    private static void bfs(int[][] graph) {
+    private static void bfs(int[][] graph, int start) {
         int n = graph.length;
         boolean[] visited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
 
-        int start = 0;
         queue.offer(start);
-        visited[start] = true;
+        visited[start]=true;
 
         while(!queue.isEmpty()) {
             int v = queue.poll();
-            System.out.println(v+" ");
 
-            for(int i = 0; i < n; i++) {
-                if(!visited[i] && graph[v][i] == 1) {
+            if(sb.length() == 0) sb.append(v);
+            else sb.append("-").append(v);
+
+            for (int i = 1; i < n; i++) {
+                if(!visited[i]&&graph[v][i]!=0){  // 아직 방문하지 않았고 간선이 존재한다면(가중치 있으나 없으나 0이 아니라면 적용 가능)
                     queue.offer(i);
-                    visited[i] = true;
+                    visited[i]=true;
                 }
             }
         }
+
 
     }
 }
