@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Dijkstra {
@@ -72,11 +74,42 @@ public class Dijkstra {
         }
 
         // 경로 복원, 출력 기능 필요
-        printPath();
+        printPath(dist, prev, n);
     }
 
+    //  경로 및 거리 출력 메서드
+    private static void printPath(int[] dist, int[] prev, int n) {
+        // 시작점(1)을 제외하고 2번 노드부터 출력
+        for (int i = 2; i <= n; i++) {
+            System.out.print("정점 [" + i + "]: ");
 
-    private static void printPath() {
+            if (dist[i] == INF) {
+                System.out.println("경로 없음");
+                continue;
+            }
 
+            // 경로 복원 (Backtracking)
+            // 도착점(i)에서 시작하여 prev 배열을 타고 시작점까지 거슬러 올라감
+            List<Integer> path = new ArrayList<>();
+            int current = i;
+            while (current != -1) {
+                path.add(current);
+                current = prev[current];
+            }
+
+            // 거슬러 올라갔으므로 순서를 뒤집어야 올바른 경로(1 -> ...)가 됨
+            Collections.reverse(path);
+
+            // 경로 출력 형식 만들기 (예: 1 - 4 - 3 - 5)
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < path.size(); j++) {
+                sb.append(path.get(j));
+                if (j < path.size() - 1) {
+                    sb.append(" - ");
+                }
+            }
+
+            System.out.println(sb.toString() + ", 길이: " + dist[i]);
+        }
     }
 }
