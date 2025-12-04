@@ -45,45 +45,46 @@ public class Parser {
         return graphList1;
     }
 
-        public static List<int[][]> parseInput2(String fileName) {
-            List<int[][]> graphList2 = new ArrayList<>();
-            File file = new File(fileName);
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNext()) {
-                    if (!scanner.hasNextInt()) break;
+    public static List<int[][]> parseInput2(String fileName) {
+        List<int[][]> graphList2 = new ArrayList<>();
+        File file = new File(fileName);
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                if (!scanner.hasNextInt()) break;
 
-                    int howManyNodes = scanner.nextInt();
-                    scanner.nextLine();
+                int howManyNodes = scanner.nextInt();
+                scanner.nextLine();
 
-                    int[][] graph = new int[howManyNodes + 1][howManyNodes + 1];
+                int[][] graph = new int[howManyNodes + 1][howManyNodes + 1];
 
-                    for (int i = 0; i < howManyNodes; i++) {
-                        if (!scanner.hasNextLine()) break;
+                for (int i = 0; i < howManyNodes; i++) {
+                    if (!scanner.hasNextLine()) break;
 
-                        String line = scanner.nextLine().trim();
-                        if (line.isEmpty()) {
-                            i--;
-                            continue;
-                        }
-
-                        Scanner lineScanner = new Scanner(line);
-                        int sourceNode = lineScanner.nextInt();
-
-                        while (lineScanner.hasNextInt()) {
-                            int targetNode = lineScanner.nextInt();
-                            int weight = lineScanner.nextInt();
-                            graph[sourceNode][targetNode] = weight;
-                        }
-                        lineScanner.close();
+                    String line = scanner.nextLine().trim();
+                    if (line.isEmpty()) {
+                        i--;
+                        continue;
                     }
-                    graphList2.add(graph);
+
+                    Scanner lineScanner = new Scanner(line);
+                    int sourceNode = lineScanner.nextInt();
+
+                    while (lineScanner.hasNextInt()) {
+                        int targetNode = lineScanner.nextInt();
+                        int weight = lineScanner.nextInt();
+                        graph[sourceNode][targetNode] = weight;
+                    }
+                    lineScanner.close();
                 }
-
-                // TODO: 그래프 변환 처리
-                return graphList2; // TODO: 수정 필요
-
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException("파일을 찾을 수 없습니다: " + fileName, e);
+                graphList2.add(graph);
             }
 
-        }}
+            // TODO: 그래프 변환 처리
+            return graphList2; // TODO: 수정 필요
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("파일을 찾을 수 없습니다: " + fileName, e);
+        }
+
+    }
+}
