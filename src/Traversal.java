@@ -46,7 +46,7 @@ public class Traversal {
         if (sb.length() == 0) {
             sb.append(v);
         } else {
-            sb.append("-").append(v);
+            sb.append(" - ").append(v);
         }
 
         // 인접한 정점 탐색 (1번부터 끝까지)
@@ -70,7 +70,7 @@ public class Traversal {
             int v = queue.poll();
 
             if(sb.length() == 0) sb.append(v);
-            else sb.append("-").append(v);
+            else sb.append(" - ").append(v);
 
             for (int i = 1; i < n; i++) {
                 if(!visited[i]&&graph[v][i]!=0){  // 아직 방문하지 않았고 간선이 존재한다면(가중치 있으나 없으나 0이 아니라면 적용 가능)
